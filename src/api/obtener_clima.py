@@ -2,7 +2,7 @@ import requests
 from datetime import datetime
 from requests.exceptions import RequestException
 from logger import manejar_excepcion, registrar_actividad
-from db import consultar_documentos
+from db import consultar_documentos, guardar_clima
 from config import OPENWEATHER_API_KEY
 
 def obtener_clima(lat, lon):
@@ -19,6 +19,7 @@ def obtener_clima(lat, lon):
         response.raise_for_status()
         clima_data = response.json()
         clima = {
+            "_id": f"{lat}_{lon}",
             "lat": lat,
             "lon": lon,
             "temperatura": clima_data["main"]["temp"],
@@ -26,7 +27,8 @@ def obtener_clima(lat, lon):
             "descripcion": clima_data["weather"][0]["description"],
             "fecha_actualizacion": datetime.now()
         }
-        registrar_actividad(f"Clima obtenido para lat: {lat}, lon: {lon}.")
+        registrar_actividad(f"Clima obtenido desde la API para lat: {lat}, lon: {lon}.")
+        guardar_clima(clima)
         return clima
     except RequestException as e:
         manejar_excepcion(e)
