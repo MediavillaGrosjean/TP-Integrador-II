@@ -1,0 +1,6 @@
+from .consultar_por_localidad import consultar_por_localidad
+from .consultar_por_provincia import consultar_por_provincia
+from .operaciones_db import consultar_documentos, insertar_documentos
+from .guardar_provincias import guardar_provincias
+from .guardar_localidades import guardar_localidades
+from .guardar_clima import guardar_clima

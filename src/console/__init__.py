@@ -1,0 +1,2 @@
+from .visualizar_datos_por_provincia import visualizar_datos_por_provincia
+from .visualizar_datos_por_localidad import visualizar_datos_por_localidad
